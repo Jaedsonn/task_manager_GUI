@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, UserSchema } from "@/lib/definitions";
 
-export default function Login() {
+export default function Signup() {
   const {
     register,
     handleSubmit,
@@ -17,7 +17,11 @@ export default function Login() {
   });
 
   const onSubmit: SubmitHandler<User> = async (data) => {
-    console.log(data);
+    const promise = await new Promise((res, rej) => {
+      setTimeout(() => {
+        res("Olá mundo");
+      }, 3000);
+    });
   };
 
   return (
@@ -25,12 +29,27 @@ export default function Login() {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
+            <h1 className="text-3xl font-bold">Signup</h1>
             <p className="text-balance text-muted-foreground">
-              Enter your email below to Login to your account
+              Enter your email below to Signup to your account
             </p>
           </div>
           <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid gap-2">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                {...register("username", {
+                  required: "Este campo é obrigatório",
+                })}
+                placeholder="myusername"
+                type="text"
+              />
+              {errors?.username && (
+                <span className={`text-sm text-red-600 font-medium`}>
+                  {errors?.username?.message}
+                </span>
+              )}
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -64,21 +83,21 @@ export default function Login() {
             <Button type="submit" className="w-full">
               {isSubmitting == true ? (
                 <div
-                  className={`w-8 h-8 rounded-full border-2  p-4 border-black transition
+                  className={`w-2 h-2 rounded-full border-2  p-4 border-white transition
              animate-spin border-t-transparent`}
                 ></div>
               ) : (
-                "Login"
+                "Singup"
               )}
             </Button>
             <Button variant="outline" className="w-full">
-              Login with Google
+              Signup with Google
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
-            You doesn&apos;t an account?{" "}
-            <Link href="/singup" className="underline">
-              Singup
+            already have an account?{" "}
+            <Link href="/" className="underline">
+              Login
             </Link>
           </div>
         </div>
