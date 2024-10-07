@@ -1,6 +1,6 @@
 import {  columns, DataTable } from "@/components/data-table";
 import { Task } from "@/lib/definitions";
-
+import TaskCreate from "@/components/task_create";
 async function getData(): Promise<Task[]> {
   // Fetch data from your API here.
   return [
@@ -40,6 +40,7 @@ export default async function DemoPage() {
 
   return (
     <div className="container mx-auto py-10">
+      <TaskCreate/>
       <DataTable columns={columns} data={data} />
     </div>
   );
