@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, UserSchema } from "@/lib/definitions";
+import { setCookie } from "cookies-next";
 
 export default function Login() {
   const {
@@ -16,8 +17,10 @@ export default function Login() {
     resolver: zodResolver(UserSchema),
   });
 
-  const onSubmit: SubmitHandler<User> = async (data) => {
+  const onSubmit: SubmitHandler<User> = (data) => {
     console.log(data);
+    setCookie("token", "asdjfkasdjfkasf");
+    setCookie("role", "admin");
   };
 
   return (

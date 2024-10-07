@@ -1,7 +1,10 @@
 import { z } from "zod";
 
 export const UserSchema = z.object({
-  username: z.string().min(3, "Username must be at 3 characters long"),
+  username: z
+    .string()
+    .min(3, "Username must be at 3 characters long")
+    .optional(),
   email: z.string().email("Invalid email"),
   password: z
     .string()
@@ -15,7 +18,7 @@ export const TaskSchema = z.object({
   task: z.number(),
   status: z.string(),
   email: z.string().email("Invalid email"),
-  task_description: z.string()
+  task_description: z.string(),
 });
 
 export type Task = z.infer<typeof TaskSchema>;
