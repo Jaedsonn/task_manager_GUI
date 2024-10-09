@@ -1,8 +1,8 @@
 import { columns, DataTable } from "@/components/data-table";
 import { Task } from "@/lib/definitions";
 import TaskCreate from "@/components/task_create";
-import { getCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
+import MenuProfile from "@/components/menu-profile";
 async function getData(): Promise<Task[]> {
   // Fetch data from your API here.
   return [
@@ -43,7 +43,10 @@ export default async function DemoPage() {
 
   return (
     <div className="container mx-auto py-10">
-      {token === "admin" ? <TaskCreate /> : null}
+      <div className="flex justify-between">
+        {token === "admin" ? <TaskCreate /> : null}
+        <MenuProfile />
+      </div>
       <DataTable columns={columns} data={data} />
     </div>
   );
